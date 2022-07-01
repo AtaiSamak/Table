@@ -8,15 +8,14 @@ const getPagination = ({ size, current }) => {
         return [...pagination.slice(0, 7), DOTS, pagination[size - 1]];
     } else if (current > size - 6) {
         return [pagination[0], DOTS, ...pagination.slice(size - 7)];
-    } else {
-        return [
-            pagination[0],
-            DOTS,
-            ...pagination.slice(current - 2, current + 3),
-            DOTS,
-            pagination[size - 1],
-        ];
     }
+    return [
+        pagination[0],
+        DOTS,
+        ...pagination.slice(current - 2, current + 3),
+        DOTS,
+        pagination[size - 1],
+    ];
 };
 
 export default getPagination;

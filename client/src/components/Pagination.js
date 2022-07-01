@@ -10,9 +10,9 @@ const Pagination = ({ pageControl }) => {
         return () => move(id);
     };
 
-    const items = pagination.map((pageID) => (
+    const items = pagination.map((pageID, id) => (
         <div
-            key={pageID}
+            key={id}
             className={pageID === currPage ? "active" : ""}
             onClick={handleClick(pageID)}
         >
