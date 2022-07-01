@@ -30,4 +30,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 Fro the API, I used my own database on PostgreSQL.<br>
 The data comes in the form of an array.<br>
 And each element of the array looks like this:<br>
-`{id: 1, name: 'something', amount: '12', distance: '100', date: '1998-12-31T21:00:00.000Z'}`
+`{id: 1, name: 'something', amount: 12, distance: 100, date: '1998-12-31T21:00:00.000Z'}`
