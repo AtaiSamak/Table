@@ -1,0 +1,29 @@
+.customDropdown {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 10px;
+}
+
+.customDropdown select {
+	cursor: pointer;
+	background-color: #323c50;
+	color: #fff;
+	font-size: inherit;
+	padding: 0.5em;
+	padding-right: 2.5em;
+	border: 0;
+	margin: 0;
+	border-radius: 3px;
+	text-indent: 0.01px;
+	text-overflow: "";
+	-webkit-appearance: button; /* hide default arrow in chrome OSX */
+}
+
+.customDropdown select[disabled] {
+	color: rgba(0, 0, 0, 0.3);
+}
+
+.customDropdown select[disabled]::after {
+	color: rgba(0, 0, 0, 0.1);
+}

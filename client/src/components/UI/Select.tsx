@@ -1,6 +1,6 @@
 import { EventType } from "@testing-library/react";
 import React, { ChangeEvent, FC } from "react";
-import "../../styles/select.scss";
+import styles from "../../styles/UI/select.module.scss";
 
 type Props = {
 	children: React.ReactNode;
@@ -10,7 +10,7 @@ type Props = {
 
 const Select: FC<Props> = ({ children, ...props }) => {
 	return (
-		<span className="custom-dropdown">
+		<span className={styles.customDropdown}>
 			<select {...props}>{children}</select>
 		</span>
 	);

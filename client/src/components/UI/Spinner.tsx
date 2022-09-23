@@ -1,9 +1,9 @@
 import React from "react";
-import "../../styles/spinner.scss";
+import styles from "../../styles/UI/spinner.module.scss";
 
 const Spinner = () => {
 	return (
-		<div className="lds-roller">
+		<div className={styles.ldsRoller}>
 			<div></div>
 			<div></div>
 			<div></div>

@@ -8,12 +8,13 @@ import { useSelector } from "react-redux";
 import Pagination from "./Pagination";
 import Spinner from "./UI/Spinner";
 import Table from "./table";
+import styles from "../styles/content.module.scss";
 
 const MSG_MAP = {
 	idle: null,
 	loading: <Spinner />,
-	failure: <h1 className="error">Something goes wrong</h1>,
-	successed: <h1>Data not received</h1>,
+	failure: <h1 className={styles.error}>Something goes wrong</h1>,
+	successed: <h1>No data</h1>,
 };
 
 const Content = () => {

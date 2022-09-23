@@ -1,10 +1,10 @@
 import React, { useState, FC, ChangeEvent, useEffect } from "react";
 import Select from "./UI/Select";
-import "../styles/filter.scss";
 import { ComparisonTypes, FilterColumns } from "../types/table";
 import { useDispatch, useSelector } from "react-redux";
 import { tableActions } from "../store/table/tableSlice";
 import { selectTableStatus } from "../store/table/tableSelectors";
+import styles from "../styles/filter.module.scss";
 
 const Filter = () => {
 	const dispatch = useDispatch();
@@ -43,7 +43,7 @@ const Filter = () => {
 	}, [searchValue, column, comparison, status]);
 
 	return (
-		<div className="filter">
+		<div className={styles.filter}>
 			<Select value={column} onChange={handleSelectChange("column")}>
 				<option value="name">Название</option>
 				<option value="amount">Количество</option>
@@ -56,7 +56,7 @@ const Filter = () => {
 				<option value="less">Меньше</option>
 			</Select>
 			<input
-				className="input"
+				className={styles.input}
 				value={searchValue}
 				onChange={handleSearchValueChange}
 				placeholder="Поиск"

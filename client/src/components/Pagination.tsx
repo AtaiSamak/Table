@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PaginationUtils from "../helpers/pagination";
 import { tablePaginationActions } from "../store/table/tablePaginationSlice";
@@ -6,7 +6,7 @@ import {
 	selectTableFilteredItems,
 	selectTablePagination,
 } from "../store/table/tableSelectors";
-import "../styles/pagination.scss";
+import styles from "../styles/pagination.module.scss";
 
 const Pagination = () => {
 	const dispatch = useDispatch();
@@ -30,19 +30,23 @@ const Pagination = () => {
 	const handleMoveNext = () => dispatch(tablePaginationActions.moveNext());
 	const handleMovePrev = () => dispatch(tablePaginationActions.movePrev());
 
-	const items = paginationTemplate.map((pageNumber, id) => (
-		<div
-			key={id}
-			className={pageNumber === currentPage ? "active" : ""}
-			onClick={handleMoveTo(pageNumber)}
-		>
-			{typeof pageNumber !== "string" ? pageNumber + 1 : pageNumber}
-			{/* if pageNumber is a string, then it will be "..."(3 dots) */}
-		</div>
-	));
+	const items = useMemo(
+		() =>
+			paginationTemplate.map((pageNumber, id) => (
+				<div
+					key={id}
+					className={pageNumber === currentPage ? styles.active : ""}
+					onClick={handleMoveTo(pageNumber)}
+				>
+					{typeof pageNumber !== "string" ? pageNumber + 1 : pageNumber}
+					{/* if pageNumber is a string, then it will be "..."(3 dots) */}
+				</div>
+			)),
+		[paginationTemplate]
+	);
 
 	return (
-		<div className="pagination">
+		<div className={styles.pagination}>
 			<div onClick={handleMovePrev}>&laquo;</div>
 			{items}
 			<div onClick={handleMoveNext}>&raquo;</div>

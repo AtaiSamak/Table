@@ -1,0 +1,25 @@
+.filter {
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	flex-wrap: wrap;
+}
+
+.input {
+	background-color: #323c50;
+	font-family: inherit;
+	font-size: inherit;
+	color: #fff;
+	border: none;
+	max-height: 1.2em;
+	min-height: 1.2em;
+	padding: 0.5em;
+	border-radius: 3px;
+	margin: 10px;
+
+	&::placeholder {
+		font-family: inherit;
+		font-size: inherit;
+		color: #a7a1ae;
+	}
+}
