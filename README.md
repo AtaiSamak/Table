@@ -3,21 +3,21 @@
 #### 1. Download/Clone this repo
 
 ```
-git clone git@github.com:AtaiSamak/Table.git
+git clone https://github.com/AtaiSamak/Table.git
 ```
 
-#### 2. `cd` into the server directory, run `npm install` and `npm run start`
+#### 2. `cd` into the server directory, run `npm install` and `npm start`
 
 ```
 cd .\Table\server
 npm install
-npm run start
+npm start
 ```
 
 #### 4. `cd` into the client directory, run `npm install` and `npm start`
 
 ```
-cd ..\client
+cd .\Table\client
 npm install
 npm start
 ```
