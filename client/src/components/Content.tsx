@@ -6,7 +6,6 @@ import {
 } from "../store/table/tableSelectors";
 import { useSelector } from "react-redux";
 import Pagination from "./Pagination";
-import usePagination from "../hooks/usePagination";
 import Spinner from "./UI/Spinner";
 import Table from "./table";
 
@@ -21,16 +20,13 @@ const Content = () => {
 	const items = useSelector(selectTableItems);
 	const filteredItems = useSelector(selectTableFilteredItems);
 	const status = useSelector(selectTableStatus);
-	const { visibleData, ...pageControl } = usePagination({
-		data: items,
-	});
 
 	if (items.length === 0) return MSG_MAP[status as keyof typeof MSG_MAP];
 	else if (filteredItems.length === 0) return <h1>Not found</h1>;
 	return (
 		<>
 			<Table />
-			<Pagination pageControl={pageControl} />
+			<Pagination />
 		</>
 	);
 };
