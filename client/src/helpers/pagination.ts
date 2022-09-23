@@ -1,8 +1,10 @@
 const DOTS = "...";
 
 class PaginationUtils {
-	static getArray(pages: number, currentPage: number) {
-		const pagination = new Array(pages).fill(0).map((_, id) => id);
+	static getTemplate(pages: number, currentPage: number) {
+		const pagination: (string | number)[] = new Array(pages)
+			.fill(0)
+			.map((_, id) => id);
 
 		if (pages <= 7) return pagination;
 		else if (currentPage < 5) {

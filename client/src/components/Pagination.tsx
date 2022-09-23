@@ -12,7 +12,7 @@ const Pagination = () => {
 	const dispatch = useDispatch();
 	const { pages, currentPage } = useSelector(selectTablePagination);
 	const filteredItems = useSelector(selectTableFilteredItems);
-	const pagination = PaginationUtils.getArray(pages, currentPage);
+	const paginationTemplate = PaginationUtils.getTemplate(pages, currentPage);
 
 	useEffect(() => {
 		if (filteredItems.length > 0)
@@ -23,26 +23,21 @@ const Pagination = () => {
 			);
 	}, [filteredItems]);
 
-	const handleMoveTo = (newPageID: number | string) => () => {
-		if (typeof newPageID === "string") return;
-		dispatch(tablePaginationActions.moveTo({ newPage: newPageID }));
+	const handleMoveTo = (newPageNumber: number | string) => () => {
+		if (typeof newPageNumber === "string") return;
+		dispatch(tablePaginationActions.moveTo({ newPageNumber }));
 	};
+	const handleMoveNext = () => dispatch(tablePaginationActions.moveNext());
+	const handleMovePrev = () => dispatch(tablePaginationActions.movePrev());
 
-	const handleMoveNext = () => {
-		dispatch(tablePaginationActions.moveNext());
-	};
-
-	const handleMovePrev = () => {
-		dispatch(tablePaginationActions.movePrev());
-	};
-
-	const items = pagination.map((pageID, id) => (
+	const items = paginationTemplate.map((pageNumber, id) => (
 		<div
 			key={id}
-			className={pageID === currentPage ? "active" : ""}
-			onClick={handleMoveTo(pageID)}
+			className={pageNumber === currentPage ? "active" : ""}
+			onClick={handleMoveTo(pageNumber)}
 		>
-			{typeof pageID !== "string" ? pageID + 1 : pageID}
+			{typeof pageNumber !== "string" ? pageNumber + 1 : pageNumber}
+			{/* if pageNumber is a string, then it will be "..."(3 dots) */}
 		</div>
 	));
 

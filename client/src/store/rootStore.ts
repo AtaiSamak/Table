@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { create } from "domain";
 import createSagaMiddleware from "@redux-saga/core";
 import tableReducer from "./table/tableSlice";
 import { sagaWatcher } from "./sagas";

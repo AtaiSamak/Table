@@ -14,9 +14,9 @@ const initialState: State = {
 	visibilityZone: [0, ROW_LENGTH],
 };
 
-const calculateVisibleZone = (newPage: number): [number, number] => [
-	newPage * ROW_LENGTH,
-	newPage * ROW_LENGTH + ROW_LENGTH,
+const calculateVisibleZone = (newPageNumber: number): [number, number] => [
+	newPageNumber * ROW_LENGTH,
+	newPageNumber * ROW_LENGTH + ROW_LENGTH,
 ];
 
 const tablePaginationSlice = createSlice({
@@ -26,17 +26,18 @@ const tablePaginationSlice = createSlice({
 		calculateNewPaginationOptions(state, action) {
 			const { itemsLength } = action.payload;
 			state.currentPage = 0;
+			state.visibilityZone = calculateVisibleZone(0);
 			if (itemsLength > 0) state.pages = Math.ceil(itemsLength / ROW_LENGTH);
 		},
 		moveTo(state, action) {
-			const { newPage } = action.payload;
+			const { newPageNumber } = action.payload;
 			if (
-				newPage >= 0 &&
-				newPage < state.pages &&
-				state.currentPage !== newPage
+				newPageNumber >= 0 &&
+				newPageNumber < state.pages &&
+				state.currentPage !== newPageNumber
 			) {
-				state.currentPage = newPage;
-				state.visibilityZone = calculateVisibleZone(newPage);
+				state.currentPage = newPageNumber;
+				state.visibilityZone = calculateVisibleZone(newPageNumber);
 			}
 		},
 		moveNext(state) {
