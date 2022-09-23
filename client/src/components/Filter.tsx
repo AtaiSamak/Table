@@ -2,16 +2,16 @@ import React, { useState, FC, ChangeEvent, useEffect } from "react";
 import Select from "./UI/Select";
 import "../styles/filter.scss";
 import { ComparisonTypes, FilterColumns } from "../types/table";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { tableActions } from "../store/table/tableSlice";
+import { selectTableStatus } from "../store/table/tableSelectors";
 
-type Props = {};
-
-const Filter: FC<Props> = () => {
+const Filter = () => {
+	const dispatch = useDispatch();
+	const status = useSelector(selectTableStatus);
 	const [searchValue, setSearchValue] = useState("");
 	const [column, setColumn] = useState<FilterColumns>("name");
 	const [comparison, setComparison] = useState<ComparisonTypes>("equal");
-	const dispatch = useDispatch();
 
 	const handleSearchValueChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(event.target.value);
@@ -31,14 +31,16 @@ const Filter: FC<Props> = () => {
 		};
 
 	useEffect(() => {
-		dispatch(
-			tableActions.changeFilterOptions({
-				column,
-				comparison,
-				searchValue,
-			})
-		);
-	}, [searchValue, column, comparison]);
+		if (status === "succeeded") {
+			dispatch(
+				tableActions.filterItems({
+					column,
+					comparison,
+					searchValue,
+				})
+			);
+		}
+	}, [searchValue, column, comparison, status]);
 
 	return (
 		<div className="filter">

@@ -1,26 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ComparisonTypes, FilterColumns, TableItem } from "../../types/table";
+import { TableItem } from "../../types/table";
+import Filter from "../../helpers/filter";
 
 type State = {
 	status: "idle" | "loading" | "succeeded" | "failure";
 	items: TableItem[];
 	error: null | string;
-	filterOptions: {
-		column: FilterColumns;
-		comparison: ComparisonTypes;
-		searchValue: string;
-	};
+	filteredItems: TableItem[];
 };
 
 const initialState: State = {
 	status: "idle",
 	items: [],
 	error: null,
-	filterOptions: {
-		column: "name",
-		comparison: "equal",
-		searchValue: "",
-	},
+	filteredItems: [],
 };
 
 const tableSlice = createSlice({
@@ -39,10 +32,41 @@ const tableSlice = createSlice({
 			state.items = [];
 			state.error = action.payload.error;
 		},
-		changeFilterOptions(state, action) {
-			state.filterOptions.column = action.payload.column;
-			state.filterOptions.comparison = action.payload.comparison;
-			state.filterOptions.searchValue = action.payload.searchValue;
+		filterItems(state, action) {
+			const { column, comparison, searchValue } = action.payload;
+			if (!searchValue) state.filteredItems = state.items;
+			else {
+				switch (comparison) {
+					case "contain":
+						state.filteredItems = Filter.byContain(
+							state.items,
+							column,
+							searchValue
+						);
+						break;
+					case "equal":
+						state.filteredItems = Filter.byEqual(
+							state.items,
+							column,
+							searchValue
+						);
+						break;
+					case "less":
+						state.filteredItems = Filter.byLess(
+							state.items,
+							column,
+							searchValue
+						);
+						break;
+					case "more":
+						state.filteredItems = Filter.byMore(
+							state.items,
+							column,
+							searchValue
+						);
+						break;
+				}
+			}
 		},
 	},
 });
